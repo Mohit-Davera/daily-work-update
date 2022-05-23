@@ -24,7 +24,7 @@ public class RpcServerController {
         logger.info(new String(msg.getBody()));
         int r=fib(number);
         logger.info("Calculated: {}",r);
-        Message response = MessageBuilder.withBody((r + "bc").getBytes()).build();
+        Message response = MessageBuilder.withBody((r+ "").getBytes()).build();
         logger.info("Server CorrelationId {}",(response.getMessageProperties().getCorrelationId()));
         CorrelationData correlationData = new CorrelationData(msg.getMessageProperties().getCorrelationId());
         rabbitTemplate.sendAndReceive(RabbitConfig.RPC_EXCHANGE, RabbitConfig.RPC_QUEUE2, response, correlationData);
